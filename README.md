@@ -28,6 +28,8 @@ The system includes features like **dynamic modals for managing leads and opport
 - **Separation of Concerns** → Organized code structure for easier navigation.
 - **Type-safe validation with Zod** → Ensures forms are validated correctly before submission.
 - **React Query caching** → Local state synchronization after mutations.
+- **Optimistic updates** → Immediate UI updates for better UX.
+- **Persistence of filters/sorting** → Filter and sort settings are saved to localStorage for continuity.
 - **Clean commit and branch practices** → Organized version control.
 - **Pagination for data** → Leads and opportunities are paginated for smoother browsing experience.
 
@@ -58,6 +60,7 @@ The system includes features like **dynamic modals for managing leads and opport
   - View a list of potential opportunities associated with leads.
   - Convert leads into opportunities with a single action.
   - Updates immediately reflected in the system using React Query cache.
+  - Optimistic updates with rollback applied for conversions and status changes.
 - **Status Management**
   - Type-safe state updates across the app ensure consistency.
 - **Pagination**
