@@ -48,6 +48,10 @@ The system includes features like **dynamic modals for managing leads and opport
   - Hover and scale animations for buttons.
 - **Pagination**
   - Leads are paginated for smoother browsing of large datasets.
+- **Persisted Filters and Sorting**
+  - Filter and sort selections are saved in localStorage.
+  - User preferences remain even after page reload, improving UX.
+  
 
 ### Opportunities
 - **Opportunity View**
