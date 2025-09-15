@@ -15,10 +15,11 @@ export const useLeads = () => {
   });
 
   const updateLeadStatus = useMutation({
-    mutationFn: ({ id, status }: { id: number; status: string }) => {
+    mutationFn: ({ id, email, status }: { id: number; email: string; status: string }) => {
       return new Promise<Lead>((resolve) => {
         setTimeout(() => {
-          const updatedLead = { ...leads?.find((lead) => Number(lead.id) === Number(id)), status };
+          const leadToUpdate = leads?.find((l) => Number(l.id) === Number(id));
+          const updatedLead = { ...leadToUpdate, email, status };
           resolve(updatedLead as Lead);
         }, 300);
       });

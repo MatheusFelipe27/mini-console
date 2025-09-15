@@ -13,6 +13,8 @@ import TableFilterSelect from "../UI/tableFilterSelect";
 import { IoSearchOutline } from "react-icons/io5";
 import { useLeads } from "@/hooks/useLeads";
 import { useOpportunities } from "@/hooks/useOpportunities";
+import LeadSlideOver from "../slideOver/leadSlideOver";
+import type { Lead } from "@/types/lead";
 
 const leadHeaders: string[] = [
   "id",
@@ -27,6 +29,8 @@ const leadHeaders: string[] = [
 const LeadTable = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchValue, setSearchValue] = useState<string>("");
+  const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
+  const [isSlideOverOpen, setIsSlideOverOpen] = useState(false);
   const { leads, convertLead } = useLeads();
   const { createOpportunity} = useOpportunities(leads??[])
 
@@ -113,6 +117,10 @@ const LeadTable = () => {
             {paginatedLeads?.length > 0 ? (
               paginatedLeads.map((lead, idx) => (
                 <TableRow
+                  onClick={() => {
+                    setSelectedLead(lead);
+                    setIsSlideOverOpen(true);
+                  }}
                   key={idx}
                   className="cursor-pointer hover:bg-gray-200 border-t border-white/12"
                 >
@@ -149,7 +157,8 @@ const LeadTable = () => {
                   </TableCell>
                   <TableCell className="px-4 bg-transparent">
                     <button
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         const newStatus =
                           lead.status === "Converted" ? "Deconverted" : "Converted";
                         convertLead.mutate({ id: lead.id, newStatus });
@@ -195,6 +204,11 @@ const LeadTable = () => {
           totalPages={totalPages}
         />
       </div>
+      <LeadSlideOver
+        lead={selectedLead}
+        open={isSlideOverOpen}
+        onClose={() => setIsSlideOverOpen(false)}
+      />
     </>
   );
 };
