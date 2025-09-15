@@ -6,7 +6,7 @@
     "email": "matheus.felipe@example.com",
     "source": "LinkedIn",
     "score": 85,
-    "status": "Low"
+    "status": "Converted"
   },
   {
     "id": "2",
@@ -15,7 +15,7 @@
     "email": "ana.clara@example.com",
     "source": "Website",
     "score": 92,
-    "status": "High"
+    "status": "Interested"
   },
   {
     "id": "3",
@@ -24,7 +24,7 @@
     "email": "lucas.silva@example.com",
     "source": "Referral",
     "score": 78,
-    "status": "Low"
+    "status": "Deconverted"
   },
   {
     "id": "4",
@@ -33,7 +33,7 @@
     "email": "mariana.souza@example.com",
     "source": "Email Campaign",
     "score": 88,
-    "status": "Medium"
+    "status": "Converted"
   },
   {
     "id": "5",
@@ -42,7 +42,7 @@
     "email": "pedro.henrique@example.com",
     "source": "LinkedIn",
     "score": 95,
-    "status": "High"
+    "status": "Interested"
   },
   {
     "id": "6",
@@ -51,7 +51,7 @@
     "email": "carla.mendes@example.com",
     "source": "Website",
     "score": 80,
-    "status": "Low"
+    "status": "Deconverted"
   },
   {
     "id": "7",
@@ -60,7 +60,7 @@
     "email": "rafael.costa@example.com",
     "source": "Referral",
     "score": 90,
-    "status": "Medium"
+    "status": "Converted"
   },
   {
     "id": "8",
@@ -69,6 +69,6 @@
     "email": "juliana.alves@example.com",
     "source": "Email Campaign",
     "score": 82,
-    "status": "Low"
+    "status": "Interested"
   }
 ]
