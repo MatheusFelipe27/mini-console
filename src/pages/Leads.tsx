@@ -1,4 +1,4 @@
-import LeadTable from "@/components/Tables/leadTable"
+import LeadTable from "../components/Tables/LeadTable"
 import OpportunityTable from "@/components/Tables/opportunityTable"
 import { useLeads } from "@/hooks/useLeads"
 import { useOpportunities } from "@/hooks/useOpportunities"

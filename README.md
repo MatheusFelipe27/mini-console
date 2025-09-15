@@ -19,6 +19,7 @@ The system includes features like **dynamic modals for managing leads and opport
 - **JSON Data Simulation** → Simulated API responses with artificial network delay.
 - **ESLint & Prettier** → Code quality, formatting, and consistency.
 - **GitFlow** → Branching and commit organization following best practices.
+- **GitHub Pages Deployment** → Application is published live and accessible online.
 
 ---
 
@@ -32,7 +33,7 @@ The system includes features like **dynamic modals for managing leads and opport
 - **Persistence of filters/sorting** → Filter and sort settings are saved to localStorage for continuity.
 - **Clean commit and branch practices** → Organized version control.
 - **Pagination for data** → Leads and opportunities are paginated for smoother browsing experience.
-
+- **Live Deployment** → The app is hosted on GitHub Pages for instant access.
 ---
 
 ## Features
@@ -98,3 +99,14 @@ npm install
 
 2. Run the application
 npm run dev
+
+## Deployment
+
+The project is deployed on GitHub Pages. After running the build and deploy scripts, the application is available at:
+
+https://MatheusFelipe27.github.io/mini-console/
+
+To deploy the project:
+
+1. Deploy to GitHub Pages::
+npm run deploy
