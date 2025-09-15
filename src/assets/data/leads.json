@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "name": "Matheus Felipe",
+    "company": "Tech Solutions",
+    "email": "matheus.felipe@example.com",
+    "source": "LinkedIn",
+    "score": 85,
+    "status": "Low"
+  },
+  {
+    "id": "2",
+    "name": "Ana Clara",
+    "company": "Innovatech",
+    "email": "ana.clara@example.com",
+    "source": "Website",
+    "score": 92,
+    "status": "High"
+  },
+  {
+    "id": "3",
+    "name": "Lucas Silva",
+    "company": "Alpha Corp",
+    "email": "lucas.silva@example.com",
+    "source": "Referral",
+    "score": 78,
+    "status": "Low"
+  },
+  {
+    "id": "4",
+    "name": "Mariana Souza",
+    "company": "Beta Ltda",
+    "email": "mariana.souza@example.com",
+    "source": "Email Campaign",
+    "score": 88,
+    "status": "Medium"
+  },
+  {
+    "id": "5",
+    "name": "Pedro Henrique",
+    "company": "Gamma Inc",
+    "email": "pedro.henrique@example.com",
+    "source": "LinkedIn",
+    "score": 95,
+    "status": "High"
+  },
+  {
+    "id": "6",
+    "name": "Carla Mendes",
+    "company": "Delta Tech",
+    "email": "carla.mendes@example.com",
+    "source": "Website",
+    "score": 80,
+    "status": "Low"
+  },
+  {
+    "id": "7",
+    "name": "Rafael Costa",
+    "company": "Epsilon Solutions",
+    "email": "rafael.costa@example.com",
+    "source": "Referral",
+    "score": 90,
+    "status": "Medium"
+  },
+  {
+    "id": "8",
+    "name": "Juliana Alves",
+    "company": "Zeta Corp",
+    "email": "juliana.alves@example.com",
+    "source": "Email Campaign",
+    "score": 82,
+    "status": "Low"
+  }
+]
