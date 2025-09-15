@@ -16,7 +16,7 @@ The system includes features like **dynamic modals for managing leads and opport
 - **React Query** → State management for asynchronous data, caching, and local state updates.
 - **Framer Motion** → Smooth animations for UI transitions and modals.
 - **React Icons** → Iconography for interface elements.
-- **JSON Data Simulation** → Simulated API responses for development.
+- **JSON Data Simulation** → Simulated API responses with artificial network delay.
 - **ESLint & Prettier** → Code quality, formatting, and consistency.
 - **GitFlow** → Branching and commit organization following best practices.
 
@@ -68,6 +68,7 @@ The system includes features like **dynamic modals for managing leads and opport
 
 ### Simulated API
 - Leads and opportunities are fetched from **local JSON files** with simulated network delay.
+- A 2-second artificial delay simulates real network latency.
 - All mutations (email/status updates, conversions) are reflected in the cache to mimic backend interactions.
 
 ---

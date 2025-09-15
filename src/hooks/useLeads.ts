@@ -8,9 +8,9 @@ export const useLeads = () => {
   const { data: leads = [], isLoading } = useQuery({
     queryKey: ["leads"],
     queryFn: async () => {
-      return new Promise<Lead[]>((resolve) => setTimeout(() => resolve(leadsData), 500));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      return leadsData;
     },
-    initialData: leadsData,
     staleTime: Infinity
   });
 
