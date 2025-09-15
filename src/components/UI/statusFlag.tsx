@@ -3,21 +3,15 @@ interface StatusFlagProps {
 }
 
 const statusFlagMapperColor: Record<string, string> = {
-  Low: "#FECACA",
-  Medium: "#FDE68A",
-  High: "#A7F3D0",
-};
-
-const statusDisplayMapper: Record<string, string> = {
-  Low: "Low Chance",
-  Medium: "Medium Chance",
-  High: "High Chance",
+  Deconverted: "#FECACA",
+  Interested: "#FDE68A",
+  Converted: "#A7F3D0",
 };
 
 const statusTextColor: Record<string, string> = {
-  Low: "#991B1B",
-  Medium: "#92400E",
-  High: "#065F46",
+  Deconverted: "#991B1B",
+  Interested: "#92400E",
+  Converted: "#065F46",
 };
 
 const StatusFlag = ({ status }: StatusFlagProps) => {
@@ -31,7 +25,7 @@ const StatusFlag = ({ status }: StatusFlagProps) => {
           className={`font-[600] text-[12px] bg-transparent`}
           style={{ color: statusTextColor[status] }}
         >
-          {statusDisplayMapper[status]}
+          {status}
         </span>
       </div>
     </>

@@ -6,13 +6,13 @@ import {
   TableHeader,
   TableRow,
 } from "../UI/table";
-import type { Lead } from "@/types/lead";
-import leadsData from "@/assets/data/leads.json";
 import StatusFlag from "../UI/statusFlag";
 import Pagination from "../Pagination/pagination";
 import { useState } from "react";
 import TableFilterSelect from "../UI/tableFilterSelect";
 import { IoSearchOutline } from "react-icons/io5";
+import { useLeads } from "@/hooks/useLeads";
+import { useOpportunities } from "@/hooks/useOpportunities";
 
 const leadHeaders: string[] = [
   "id",
@@ -25,9 +25,11 @@ const leadHeaders: string[] = [
 ];
 
 const LeadTable = () => {
-  const leads: Lead[] = leadsData;
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchValue, setSearchValue] = useState<string>("");
+  const { leads, convertLead } = useLeads();
+  const { createOpportunity} = useOpportunities(leads??[])
+
   const [filters, setFilters] = useState({
     status: "All",
     sortOrder: "None (—)",
@@ -65,7 +67,7 @@ const LeadTable = () => {
 
   return (
     <>
-      <div className="w-[75%] flex flex-col gap-4 flex-1 rounded-[16px] mt-6 border-2">
+      <div className="w-[75%] flex flex-col gap-4 h-fit rounded-[16px] mt-6 border-2">
         <div className="flex gap-2 w-[75%] items-center justify-between mt-4 ml-4">
           <div className="relative w-[80%]">
             <IoSearchOutline
@@ -85,7 +87,7 @@ const LeadTable = () => {
           <TableFilterSelect
             initialState="All"
             onChange={(val) => setFilters({ ...filters, status: val })}
-            options={["Low", "Medium", "High"]}
+            options={["Converted", "Interested", "Deconverted"]}
           />
           <TableFilterSelect
             initialState="None (—)"
@@ -108,49 +110,83 @@ const LeadTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {paginatedLeads?.map((lead, idx) => (
-              <TableRow
-                key={idx}
-                className="cursor-pointer hover:bg-gray-200 border-t border-white/12"
-              >
-                <TableCell className="px-4 text-[14px] text-[#111827] bg-transparent">
-                  {lead.id}
-                </TableCell>
-                <TableCell className="px-4 max-w-[200px] bg-transparent">
-                  <div className="flex flex-col bg-transparent">
-                    <span className="text-[14px] truncate bg-transparent text-[#111827] max-w-full">
-                      {lead.name}
-                    </span>
-                    <span className="font-[200] text-[14px] bg-transparent text-[#6B7280] max-w-full">
-                      {lead.email}
-                    </span>
-                  </div>
-                </TableCell>
-                <TableCell className="w-[180px] max-w-[180px] bg-transparent px-4 text-[14px] text-[#111827]">
-                  {lead.company}
-                </TableCell>
-                <TableCell className="px-4 text-[14px] text-[#111827] bg-transparent">
-                  {lead.source}
-                </TableCell>
-                <TableCell className="px-4 h-full text-[14px] text-[#111827] bg-transparent flex items-center gap-2 justify-center">
-                  <div className="w-20 h-2 bg-gray-300 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-[#111827] rounded-full"
-                      style={{ width: `${lead.score}%` }}
-                    ></div>
-                  </div>
-                  {lead.score}
-                </TableCell>
-                <TableCell className="px-4 bg-transparent">
-                  <StatusFlag status={lead.status} />
-                </TableCell>
-                <TableCell className="px-4 bg-transparent">
-                  <button className="font-[600] text-[14px] text-[#3B82F6] cursor-pointer z-10">
-                    Convert Lead
-                  </button>
+            {paginatedLeads?.length > 0 ? (
+              paginatedLeads.map((lead, idx) => (
+                <TableRow
+                  key={idx}
+                  className="cursor-pointer hover:bg-gray-200 border-t border-white/12"
+                >
+                  <TableCell className="px-4 text-[14px] text-[#111827] bg-transparent">
+                    {lead.id}
+                  </TableCell>
+                  <TableCell className="px-4 max-w-[200px] bg-transparent">
+                    <div className="flex flex-col bg-transparent">
+                      <span className="text-[14px] truncate bg-transparent text-[#111827] max-w-full">
+                        {lead.name}
+                      </span>
+                      <span className="font-[200] text-[14px] bg-transparent text-[#6B7280] max-w-full">
+                        {lead.email}
+                      </span>
+                    </div>
+                  </TableCell>
+                  <TableCell className="w-[180px] max-w-[180px] bg-transparent px-4 text-[14px] text-[#111827]">
+                    {lead.company}
+                  </TableCell>
+                  <TableCell className="px-4 text-[14px] text-[#111827] bg-transparent">
+                    {lead.source}
+                  </TableCell>
+                  <TableCell className="px-4 flex items-center bg-transparent mt-2 gap-2 justify-center">
+                    <div className="w-20 h-2 bg-gray-300 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-[#111827] rounded-full"
+                        style={{ width: `${lead.score}%` }}
+                      ></div>
+                    </div>
+                    {lead.score}
+                  </TableCell>
+                  <TableCell className="px-4 bg-transparent">
+                    <StatusFlag status={lead.status} />
+                  </TableCell>
+                  <TableCell className="px-4 bg-transparent">
+                    <button
+                      onClick={() => {
+                        const newStatus =
+                          lead.status === "Converted" ? "Deconverted" : "Converted";
+                        convertLead.mutate({ id: lead.id, newStatus });
+                        if (newStatus === "Converted") {
+                          createOpportunity.mutate({
+                            id: lead.id,
+                            name: lead.name,
+                            stage: "Prospecting",
+                            amount: lead.score * 2,
+                            accountName: lead.company,
+                          });
+                        }
+                      }}
+                      className={`font-[600] text-[14px] ${
+                        lead.status === "Converted" ? "text-[#EF4444]" : "text-[#3B82F6]"
+                      } cursor-pointer z-10`}
+                    >
+                      {lead.status === "Converted" ? "Revert" : "Convert Lead"}
+                    </button>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={leadHeaders.length}
+                  className="text-center py-6 text-[#6B7280] text-[14px]"
+                >
+                  No leads
+                  <br />
+                  {searchValue 
+                    ? "Try adjusting your search or filters." 
+                    : "Add new leads to see them listed here."
+                  }
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
         <Pagination

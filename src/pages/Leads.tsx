@@ -1,8 +1,13 @@
+import LeadTable from "@/components/Tables/leadTable"
+import OpportunityTable from "@/components/Tables/opportunityTable"
+import { useLeads } from "@/hooks/useLeads"
+import { useOpportunities } from "@/hooks/useOpportunities"
 import { useState } from "react"
-import LeadTable from "../components/Tables/LeadTable"
-
 const Leads = () => {
   const [isCurrentViewLead, setIsCurrentViewLead] = useState<boolean>(true)
+  const { leads} = useLeads();
+  const {opportunities} = useOpportunities( leads ?? [])
+
   return (
     <>
       <div className="w-full h-full flex flex-col">
@@ -15,7 +20,7 @@ const Leads = () => {
              cursor-pointer font-[500]`}
             onClick={()=>setIsCurrentViewLead(true)}
           >
-            Leads (8)
+            Leads ({leads?.length})
           </button>
           <button className={`text-[14px] pb-1 b border-b-[2px]
              ${!isCurrentViewLead? 'text-[#3B82F6] border-[#3B82F6]' :
@@ -23,14 +28,14 @@ const Leads = () => {
             cursor-pointer font-[500]`}
             onClick={()=> setIsCurrentViewLead(false)}
           >
-            Opportunities (0)
+            Opportunities ({opportunities?.length})
           </button>
         </div>
         {
           isCurrentViewLead ?
           <LeadTable/>
           :
-          ''
+          <OpportunityTable/>
         }
       </div>
     </>
