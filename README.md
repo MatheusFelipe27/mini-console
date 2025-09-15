@@ -11,6 +11,7 @@ The system includes features like **dynamic modals for managing leads and opport
 - **React 19 + Vite** → Main framework and bundler for fast development and optimized builds.
 - **TypeScript** → Static typing for better safety, readability, and maintainability.
 - **Tailwind CSS** → Fast, responsive, and consistent styling.
+- **Shadcn/ui** → Accessible, reusable, and modern UI components built on top of Radix.
 - **Zod** → Type-safe form validation and schema enforcement.
 - **React Hook Form** → Efficient form handling and validation.
 - **React Query** → State management for asynchronous data, caching, and local state updates.
@@ -34,6 +35,7 @@ The system includes features like **dynamic modals for managing leads and opport
 - **Clean commit and branch practices** → Organized version control.
 - **Pagination for data** → Leads and opportunities are paginated for smoother browsing experience.
 - **Live Deployment** → The app is hosted on GitHub Pages for instant access.
+- **Accessible UI components with Shadcn/ui** → Standardized and user-friendly design system.
 ---
 
 ## Features
