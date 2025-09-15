@@ -33,11 +33,17 @@ const LeadTable = () => {
   const [isSlideOverOpen, setIsSlideOverOpen] = useState(false);
   const { leads, convertLead } = useLeads();
   const { createOpportunity} = useOpportunities(leads??[])
-
-  const [filters, setFilters] = useState({
-    status: "All",
-    sortOrder: "None (—)",
+  const [filters, setFilters] = useState(() => {
+    const savedFilters = localStorage.getItem("leadTableFilters");
+    return savedFilters
+      ? JSON.parse(savedFilters)
+      : { status: "All", sortOrder: "None (—)" };
   });
+
+  const handleFilterChange = (newFilters: typeof filters) => {
+    setFilters(newFilters);
+    localStorage.setItem("leadTableFilters", JSON.stringify(newFilters));
+  };
 
   const itemsPerPage = 6;
   const totalPages = Math.ceil((leads?.length || 0) / itemsPerPage);
@@ -89,14 +95,14 @@ const LeadTable = () => {
             />
           </div>
           <TableFilterSelect
-            initialState="All"
-            onChange={(val) => setFilters({ ...filters, status: val })}
-            options={["Converted", "Interested", "Deconverted"]}
+            value={filters.status}
+            onChange={(val) => handleFilterChange({ ...filters, status: val })}
+            options={["All", "Converted", "Interested", "Deconverted"]}
           />
           <TableFilterSelect
-            initialState="None (—)"
-            onChange={(val) => setFilters({ ...filters, sortOrder: val })}
-            options={["Ascending A → Z", "Descending Z → A"]}
+            value={filters.sortOrder}
+            onChange={(val) => handleFilterChange({ ...filters, sortOrder: val })}
+            options={["None (—)", "Ascending A → Z", "Descending Z → A"]}
           />
         </div>
 

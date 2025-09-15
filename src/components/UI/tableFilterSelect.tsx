@@ -1,35 +1,27 @@
-import React, { useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 
 interface TableFilterSelectProps {
-  initialState: string;
-  onChange?: (value: string) => void;
+  value: string;
+  onChange: (value: string) => void;
   options?: string[];
 }
 
 const TableFilterSelect = ({
-  initialState,
+  value,
   onChange,
   options,
 }: TableFilterSelectProps) => {
-  const [selectedStatus, setSelectedStatus] = useState(initialState);
-
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedStatus(e.target.value);
-    if (onChange) onChange(e.target.value);
-  };
 
   return (
     <>
       <div className="relative">
         <select
-          value={selectedStatus}
-          onChange={handleChange}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
           className="px-3 text-white font-[400] outline-none bg-gray-500
             text-[14px] py-2 rounded-[24px] pr-10 appearance-none cursor-pointer
           "
         >
-          <option className="text-white bg-gray-500" value={initialState}>{initialState}</option>
           {options?.map((opt, idx) => (
             <option key={idx} value={opt} className="text-white bg-gray-500">
               {opt}
